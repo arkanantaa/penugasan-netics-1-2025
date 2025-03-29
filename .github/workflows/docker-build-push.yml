@@ -25,6 +25,6 @@ jobs :
         name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context : .
+          context : ./src
           push: true
           tags: arkanantaaa/tugas-netics-1-2025:latest
