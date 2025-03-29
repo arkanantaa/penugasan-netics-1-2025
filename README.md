@@ -83,4 +83,7 @@ Fungsi main untuk menjalankan fungsi /health dan listen ke port 8080 (default)
   }
   ```
 
+#### Tampilan endpoint /health pada localhost saat server dijalankan
+<img src="/media/server-running.png">
+
 
