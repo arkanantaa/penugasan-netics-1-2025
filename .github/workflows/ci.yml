@@ -5,9 +5,6 @@ on : [push]
 jobs :
   build-docker :
     runs-on : ubuntu-latest
-    env : 
-        RAILWAY_TOKEN : ${{ secrets.RAILWAY_TOKEN }}
-        SERVICE_ID : cb910381-4c80-4f6f-a0a4-58a4c519f2b4
     steps:
       - 
         name : Checkout repo
