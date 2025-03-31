@@ -21,6 +21,6 @@ jobs :
         uses : actions/checkout@v4
       -
         name : Deploy railway
-        uses : railway up --service=$SVC_ID
+        run : railway up --service=$SVC_ID
         
       
