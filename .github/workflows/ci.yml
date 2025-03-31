@@ -1,6 +1,10 @@
 name : CI Build and Push to Docker
 
-on : [push]
+on : 
+  push :
+    paths-ignore :
+      - 'README.md'
+      - 'media/**'
 
 jobs :
   build-docker :
