@@ -141,6 +141,8 @@ Pada penugasan kali ini, saya menggunakan Railway sebagai VPS untuk mempublish A
 
 Buka Railway lalu pilih add new service, lalu pilih Docker dan ketik repo docker yang ingin dibuild
 
-Lalu click deploy 
+Click deploy dan tunggu hingga berhasil
+
+Buka settings dan generate domain untuk membuatnya diakses publik
 
 
