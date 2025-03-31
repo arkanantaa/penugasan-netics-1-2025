@@ -150,4 +150,98 @@ Click deploy dan tunggu hingga berhasil
 Buka settings dan generate domain untuk membuatnya diakses publik
 <img src="/media/public-vps.png">
 
+### 3. Implementasi CI/CD
+#### CI (Docker Build and Push)
+CI ini bertujuan untuk mengupdate container docker setiap kali ada perubahan yang terjadi pada repository 
+```
+on : [push]
+```
+
+Proses ini dijalankan dengan versi ubuntu terbaru
+    ```
+    jobs :
+      build-docker :
+        runs-on : ubuntu-latest
+        steps:
+    ```
+
+Repo akan di checkout untuk mendapat informaasi terbaru dari repo github 
+    ```
+          - 
+            name : Checkout repo
+            uses : actions/checkout@v4
+    ```
+
+Login Docker Hub serta setup QEMU dan Buildx Docker untuk build image dari docker sesuai config dockerfile yang sudah ada di repo
+    ```
+          -
+            name: Login Docker hub
+            uses: docker/login-action@v3
+            with:
+              username: ${{ secrets.DOCKER_USERNAME }}
+              password: ${{ secrets.DOCKER_PASSWORD }}
+          -
+            name: Set up QEMU
+            uses: docker/setup-qemu-action@v3
+          -
+            name: Set up Docker Buildx
+            uses: docker/setup-buildx-action@v3
+          -
+    ```
+
+Push ke DockerHub sesuai dengan repo Dockerhub yang sudah di push di step no. 2 
+    ```
+            name: Build and push
+            uses: docker/build-push-action@v6
+            with:
+              context : ./src
+              push: true
+              tags: ${{ secrets. DOCKER_USERNAME }}/tugas-netics-1-2025:latest
+    ```
+
+#### CD (Deploy image DockerHub ke Railway (VPS))
+CD ini bertujuan untuk mengupdate (redeploy) website jika terjadi perubahan pada file yang telah dipublish ke DockerHub
+
+CD ini akan dijalankan bila CI (push docker ke DockerHub) telah terlaksanakan
+    ```
+    on : 
+      workflow_run :
+        workflows :
+          ["CI Build and Push to Docker"]
+        types :
+          - completed 
+      ```
+
+Jika CI sudah sukses, maka CD akan dijalankan dengan
+    ```
+    jobs :
+      deploy-railway :
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    ```
+
+CD juga berjalan dengan versi ubuntu terbaru serta menggunakan container CLI railway terbaru
+    ```
+        runs-on : ubuntu-latest
+        container : ghcr.io/railwayapp/cli:latest
+    ```
+
+Set environment Token Railway dan Service ID yang didapat di website Railway
+    ```
+        env : 
+          RAILWAY_TOKEN : ${{ secrets.RAILWAY_TOKEN }}
+          SVC_ID : cb910381-4c80-4f6f-a0a4-58a4c519f2b4
+    ```
+
+Checkout repo github dan deploy website dengan `railway up --service=$SVC_ID`
+    ```
+        steps :
+          -
+            name : Checkout repo
+            uses : actions/checkout@v4
+          -
+            name : Deploy railway
+            run : |
+              cd src
+              railway up --service=$SVC_ID
+    ```
 
