@@ -1,5 +1,9 @@
 # Penugasan Netics 1 2025 (Implementasi CI/CD)
 
+## Link Hasil Pengerjaan
+[Repo DockerHub](https://hub.docker.com/repository/docker/arkanantaaa/tugas-netics-1-2025)
+[Website](https://tugas-netics-1-2025-production.up.railway.app/health)
+
 ## Teknis Pengerjaan
 Implementasikan modul CI/CD ini pada sebuah sistem server sederhana, dengan detail sebagai berikut
 1. Buatlah API publik dengan endpoint /health yang menampilkan informasi sebagai berikut:
