@@ -1,1 +1,26 @@
-a
+name : CD Deploy to Railway
+
+on : 
+  workflow_run :
+    workflows :
+      ["CI Build and Push to Docker"]
+    types :
+      - completed 
+
+jobs :
+  deploy-railway :
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on : ubuntu-latest
+    container : ghcr.io/railwayapp/cli:latest
+    env : 
+      RAILWAY_TOKEN : ${{ secrets.RAILWAY_TOKEN }}
+      SVC_ID : cb910381-4c80-4f6f-a0a4-58a4c519f2b4
+    steps :
+      -
+        name : Checkout repo
+        uses : actions/checkout@v4
+      -
+        name : Deploy railway
+        uses : railway up --service=$SVC_ID
+        
+      
