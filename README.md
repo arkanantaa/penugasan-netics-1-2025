@@ -121,12 +121,16 @@ Gunakan port 8080 dan jalankan file main untuk menjalankan server golang
 #### Build Docker
 
 Login ke akun docker lalu ke website untuk autentikasi akun docker
-`docker login`
-<img src="/media/login-docker.png>
+```
+docker login
+```
+<img src="/media/login-docker.png">
 
 Tag dengan nama repo docker sesuai nama yang kita inginkan serta push untuk menguploadnya ke docker hub
-`docker tag tugas-netics-1-2025 arkanantaaa/tugas-netics-1-2025`
-`docker push arkanantaaa/tugas-netics-1-2025`
+```
+docker tag tugas-netics-1-2025 arkanantaaa/tugas-netics-1-2025
+docker push arkanantaaa/tugas-netics-1-2025
+```
 <img src="/media/docker-push.png">
 
 > [!NOTE] 
