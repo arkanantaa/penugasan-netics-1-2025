@@ -5,6 +5,9 @@ on : [push]
 jobs :
   build-docker :
     runs-on : ubuntu-latest
+    env : 
+        RAILWAY_TOKEN : ${{ secrets.RAILWAY_TOKEN }}
+        SERVICE_ID : cb910381-4c80-4f6f-a0a4-58a4c519f2b4
     steps:
       - 
         name : Checkout repo
@@ -28,12 +31,27 @@ jobs :
           context : ./src
           push: true
           tags: ${{ secrets. DOCKER_USERNAME }}/tugas-netics-1-2025:latest
-  deploy :
-    runs-on : ubuntu-latest
-    container : ghcr.io/railwayapp/cli:latest
-    env :
-      SVC_ID : cb910381-4c80-4f6f-a0a4-58a4c519f2b4
-      RAILWAY_TOKEN : ${{ secrets. RAILWAY_TOKEN}}
-    steps :
-      - uses : actions/checkout@v3
-      - run : railway up --service=${{ env.SVC_ID }}
+      -
+        name : Set up Node.js
+        uses : actions/setup-node@v3
+        with :
+          node-version : 'latest'
+      -
+        name : Cache npm
+        id : cache-npm
+        uses : actions/cache@v3
+        env :
+          cache-name : cache-node
+        with :
+          path : ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      -
+        name : Install Railway CLI
+        run : nmp install -g @railway/cli
+      -
+        name : Deploy Railway
+        run : railway up --service=$SERVICE_ID
