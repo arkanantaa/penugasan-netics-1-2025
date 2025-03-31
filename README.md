@@ -140,9 +140,14 @@ docker push arkanantaaa/tugas-netics-1-2025
 Pada penugasan kali ini, saya menggunakan Railway sebagai VPS untuk mempublish API. 
 
 Buka Railway lalu pilih add new service, lalu pilih Docker dan ketik repo docker yang ingin dibuild
+<img src="/media/vps-docker.png">
 
 Click deploy dan tunggu hingga berhasil
+<img src="/media/vps-deploy.png">
+<img src="/media/vps-deploying.png">
+<img src="/media/vps-success.png">
 
 Buka settings dan generate domain untuk membuatnya diakses publik
+<img src="/media/public-vps.png">
 
 
