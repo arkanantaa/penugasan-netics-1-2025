@@ -86,4 +86,50 @@ Fungsi main untuk menjalankan fungsi /health dan listen ke port 8080 (default)
 #### Tampilan endpoint /health pada localhost saat server dijalankan
 <img src="/media/server-running.png">
 
+### 2. Deployment Docker dan VPS
+#### Docker
+
+Membuat Dockerfile untuk build docker dengan mengambil dari image docker 1.24 sebagai builder
+  ```
+  FROM golang:1.24 AS builder
+  ```
+
+Menerapkan /app sebagai directory pekerjaan
+  ```
+  WORKDIR /app
+  ```
+
+Copy go.mod dari file github ke dalam docker container serta download go mod di docker
+  ```
+  COPY go.mod ./
+  RUN go mod download
+  ```
+
+Copy semua file yang ada dari directory pekerjaan ke dalam docker container lalu compile golang 
+  ```
+  COPY . .
+  RUN go build -o main .
+  ```
+
+Gunakan port 8080 dan jalankan file main untuk menjalankan server golang
+  ```
+  EXPOSE 8080
+
+  CMD ["./main"]
+  ```
+
+#### Build Docker
+
+Login ke akun docker lalu ke website untuk autentikasi akun docker
+`docker login`
+<img src="/media/login-docker.png>
+
+Tag dengan nama repo docker sesuai nama yang kita inginkan serta push untuk menguploadnya ke docker hub
+`docker tag tugas-netics-1-2025 arkanantaaa/tugas-netics-1-2025`
+`docker push arkanantaaa/tugas-netics-1-2025`
+<img src="/media/docker-push.png">
+
+> [!NOTE] 
+> Karena saya lupa screenshot saat push docker pertama kali, maka tulisan pada screenshotannya layer already exists
+
 
