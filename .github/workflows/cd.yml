@@ -20,6 +20,9 @@ jobs :
         name : Checkout repo
         uses : actions/checkout@v4
       -
+        name : Change directory
+        run : cd src
+      -
         name : Deploy railway
         run : railway up --service=$SVC_ID
         
