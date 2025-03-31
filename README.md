@@ -136,4 +136,11 @@ docker push arkanantaaa/tugas-netics-1-2025
 > [!NOTE] 
 > Karena saya lupa screenshot saat push docker pertama kali, maka tulisan pada screenshotannya layer already exists
 
+#### Publish dengan VPS Publik
+Pada penugasan kali ini, saya menggunakan Railway sebagai VPS untuk mempublish API. 
+
+Buka Railway lalu pilih add new service, lalu pilih Docker dan ketik repo docker yang ingin dibuild
+
+Lalu click deploy 
+
 
