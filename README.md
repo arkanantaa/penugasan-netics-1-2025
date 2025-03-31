@@ -156,9 +156,13 @@ Buka settings dan generate domain untuk membuatnya diakses publik
 
 ### 3. Implementasi CI/CD
 #### CI (Docker Build and Push)
-CI ini bertujuan untuk mengupdate container docker setiap kali ada perubahan yang terjadi pada repository 
+CI ini bertujuan untuk mengupdate container docker setiap kali ada perubahan yang terjadi pada repository hanya pada src saja dan ignore perubahan pada README dan folder media
 ```
-on : [push]
+on : 
+  push :
+    paths-ignore :
+      - 'README.md'
+      - 'media/**'
 ```
 
 Proses ini dijalankan dengan versi ubuntu terbaru
