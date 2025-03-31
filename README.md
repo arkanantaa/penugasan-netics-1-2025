@@ -198,6 +198,7 @@ Push ke DockerHub sesuai dengan repo Dockerhub yang sudah di push di step no. 2
               push: true
               tags: ${{ secrets. DOCKER_USERNAME }}/tugas-netics-1-2025:latest
 ```
+<img src="/media/ci-docker.png">
 
 #### CD (Deploy image DockerHub ke Railway (VPS))
 CD ini bertujuan untuk mengupdate (redeploy) website jika terjadi perubahan pada file yang telah dipublish ke DockerHub
@@ -231,6 +232,8 @@ Set environment Token Railway dan Service ID yang didapat di website Railway
           RAILWAY_TOKEN : ${{ secrets.RAILWAY_TOKEN }}
           SVC_ID : cb910381-4c80-4f6f-a0a4-58a4c519f2b4
 ```
+<img src="/media/railway-serviceid.png">
+<img src="/media/railway-token.png">
 
 Checkout repo github dan deploy website dengan `railway up --service=$SVC_ID`
 ```
@@ -244,4 +247,5 @@ Checkout repo github dan deploy website dengan `railway up --service=$SVC_ID`
               cd src
               railway up --service=$SVC_ID
 ```
+<img src="/media/cd-railway.png">
 
