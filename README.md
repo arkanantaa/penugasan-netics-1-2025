@@ -1,6 +1,9 @@
 # Penugasan Netics 1 2025 (Implementasi CI/CD)
 
 ## Link Hasil Pengerjaan
+> [!NOTE] 
+> WEBSITE SUDAH DITUTUP AGAR BIAYA PROVIDER TIDAK MEMBENGKAK
+
 [Repo DockerHub](https://hub.docker.com/repository/docker/arkanantaaa/tugas-netics-1-2025)
 [Website](https://tugas-netics-1-2025-production.up.railway.app/health)
 
